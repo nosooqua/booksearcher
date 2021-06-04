@@ -26,12 +26,12 @@ body
     display: flex
     height: 100%
     margin: -24px 0 24px 0
-    transition: height .3s ease-in-out
+    transition: height .3s cubic-bezier(0.4, 0, 0.2, 1)
     &.active
       height: auto
       margin-top: 0
     input
-      transition: all .3s ease-in-out
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1)
       margin: 0 auto
       width: 100%
       max-width: 700px
@@ -58,7 +58,7 @@ body
       cursor: pointer
       & .arrow
         mask: url("../imgs/right-arrow.svg") no-repeat bottom right
-        mask-size: 24px
+        mask-size: 18px
         mask-origin: content-box
         width: 24px
         height: 100%
