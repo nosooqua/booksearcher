@@ -3,82 +3,56 @@ import './styles/app.sass'
 
 import {Logo, Navbar} from "./components/Navbar";
 import {Container} from "./components/Container";
-import {Box} from "./components/Box";
-import {BookModal} from "./components/BookModal";
+import {SearchResults} from "./components/SearchResults";
+import {useDispatch} from "react-redux";
+import {useTypedSelector} from "./hooks/useTypedSelector";
+import {input} from "./store/action-creators/input";
+import {clearBooks} from "./store/action-creators/bookSearch";
 
 const App: React.FC = () => {
 
-    const [modalShow, setModalShow] = React.useState(false)
+    const [ searchState, setSearchState ] = React.useState(false)
 
-    const handleCardClick = () => {
-        setModalShow(true)
-    }
+    const {books, error, loading} = useTypedSelector(state => state.bookSearch)
 
-    const handleModalClose = () => {
-        setModalShow(false)
+    const {value} = useTypedSelector(state => state.input)
+
+    React.useEffect(() => {
+        if(loading || error || value !== "" || books !== null) setSearchState(true)
+        else setSearchState(false)
+
+        if(value === "" && loading) {
+            dispatch(clearBooks)
+        }
+    }, [loading, error, value, books])
+
+    const dispatch = useDispatch()
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(input(e.target.value))
     }
 
     return (
-        <>
-            <div className="app">
-                <Navbar>
-                    <Logo>БукСёрчер.</Logo>
-                </Navbar>
-                <Container className="main">
-                    <div className="input active">
-                        <input placeholder="Введите название книги"/>
-                    </div>
-                    <h1>Результаты поиска:</h1>
-                    <div className="search-results">
-                        <Box onClick={handleCardClick}>
-                            <div className="arrow"/>
-                            <img src="https://via.placeholder.com/140" alt="Обложка книги"/>
-                            <div className="book-info">
-                                <p className="name">Тут название книги</p>
-                                <p className="author">А тут её автор</p>
-                            </div>
-                        </Box>
-                        <Box onClick={handleCardClick}>
-                            <div className="arrow"/>
-                            <img src="https://via.placeholder.com/140" alt="Обложка книги"/>
-                            <div className="book-info">
-                                <p className="name">Тут название книги</p>
-                                <p className="author">А тут её автор</p>
-                            </div>
-                        </Box>
-                        <Box onClick={handleCardClick}>
-                            <div className="arrow"/>
-                            <img src="https://via.placeholder.com/140" alt="Обложка книги"/>
-                            <div className="book-info">
-                                <p className="name">Тут название книги</p>
-                                <p className="author">А тут её автор</p>
-                            </div>
-                        </Box>
-                        <Box onClick={handleCardClick}>
-                            <div className="arrow"/>
-                            <img src="https://via.placeholder.com/140" alt="Обложка книги"/>
-                            <div className="book-info">
-                                <p className="name">Тут название книги</p>
-                                <p className="author">А тут её автор</p>
-                            </div>
-                        </Box>
-                        <Box onClick={handleCardClick}>
-                            <div className="arrow"/>
-                            <img src="https://via.placeholder.com/140" alt="Обложка книги"/>
-                            <div className="book-info">
-                                <p className="name">Тут название книги</p>
-                                <p className="author">А тут её автор</p>
-                            </div>
-                        </Box>
-                    </div>
-                </Container>
-                <Container className="footer">
-                    Особо важная информация для пользователей в футере
-                </Container>
-            </div>
+        <div className="app">
+            <Navbar>
+                <Logo>БукСёрчер.</Logo>
+            </Navbar>
+            <Container className="main">
+                <div className={`input${searchState ? ' active' : ''}`}>
+                    <input value={value} onChange={handleInputChange} placeholder="Введите название книги"/>
+                </div>
 
-            <BookModal bookKey="123" show={modalShow} handleModalClose={handleModalClose} />
-        </>
+                {loading && "Загрузка"}
+
+                {error && "Ошибка"}
+
+                {(searchState && books) && <SearchResults docs={books.docs}/>}
+
+            </Container>
+            <Container className="footer">
+                Особо важная информация для пользователей в футере
+            </Container>
+        </div>
     );
 }
 
