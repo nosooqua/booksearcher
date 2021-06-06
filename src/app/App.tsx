@@ -6,8 +6,11 @@ import {Container} from "./components/Container";
 import {SearchResults} from "./components/SearchResults";
 import {useDispatch} from "react-redux";
 import {useTypedSelector} from "./hooks/useTypedSelector";
-import {input} from "./store/action-creators/input";
+import {clearInput, input, sendInput} from "./store/action-creators/input";
 import {clearBooks} from "./store/action-creators/bookSearch";
+import {Box} from "./components/Box";
+import {IconButton} from "./components/IconButton";
+import {LoadingBar} from "./components/LoadingBar";
 
 const App: React.FC = () => {
 
@@ -15,21 +18,32 @@ const App: React.FC = () => {
 
     const {books, error, loading} = useTypedSelector(state => state.bookSearch)
 
-    const {value} = useTypedSelector(state => state.input)
-
-    React.useEffect(() => {
-        if(loading || error || value !== "" || books !== null) setSearchState(true)
-        else setSearchState(false)
-
-        if(value === "" && loading) {
-            dispatch(clearBooks)
-        }
-    }, [loading, error, value, books])
+    const {value, isTimerActive} = useTypedSelector(state => state.input)
 
     const dispatch = useDispatch()
 
+    React.useEffect(() => {
+        if(error || books !== null) setSearchState(true)
+        else setSearchState(false)
+    }, [error, books])
+
+    React.useEffect(() => {
+        if(value === "") {
+            dispatch(clearBooks)
+        }
+    }, [value, dispatch])
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(input(e.target.value))
+    }
+
+    const handleInputClear = () => {
+        dispatch(clearInput())
+    }
+
+    const handleInputSend = (e: React.SyntheticEvent) => {
+        e.preventDefault()
+        dispatch(sendInput())
     }
 
     return (
@@ -39,18 +53,24 @@ const App: React.FC = () => {
             </Navbar>
             <Container className="main">
                 <div className={`input${searchState ? ' active' : ''}`}>
-                    <input value={value} onChange={handleInputChange} placeholder="Введите название книги"/>
+                    <form onSubmit={handleInputSend}>
+                        <Box>
+                            <input value={value} onChange={handleInputChange} placeholder="Введите название книги"/>
+                            <IconButton type="button" disabled={loading || value === ""} onClick={handleInputClear} icon={<span className="material-icons-outlined">clear</span>}/>
+                            <IconButton type="submit" disabled={loading} icon={<span className="material-icons-outlined">send</span>}/>
+                            <LoadingBar visible={loading || isTimerActive}/>
+                        </Box>
+                    </form>
                 </div>
 
-                {loading && "Загрузка"}
+                {error}
 
-                {error && "Ошибка"}
-
-                {(searchState && books) && <SearchResults docs={books.docs}/>}
+                {(searchState && books) && <SearchResults docs={books.docs} numFound={books.numFound}/>}
 
             </Container>
             <Container className="footer">
-                Особо важная информация для пользователей в футере
+                <p>Особо важная информация для пользователей в футере</p>
+                <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
             </Container>
         </div>
     );

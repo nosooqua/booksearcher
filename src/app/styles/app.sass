@@ -30,17 +30,26 @@ body
     &.active
       height: 55px
       margin-top: 0
-    input
-      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1)
-      margin: 0 auto
+    form
       width: 100%
       max-width: 700px
-      padding: 20px 28px
-      border: none
-      border-radius: 12px
-      outline: none
+      margin: 0 auto
       align-self: center
-      box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2)
+      .box
+        display: flex
+        padding: 0 14px
+        overflow: hidden
+        position: relative
+        .slider
+          position: absolute
+          bottom: 0
+          margin-left: -15px
+        input
+          margin: 0 14px
+          padding: 20px 0
+          border: none
+          outline: none
+          width: 100%
 
   .search-results
     display: flex
@@ -56,6 +65,7 @@ body
       display: flex
       align-items: center
       cursor: pointer
+      min-width: 310px
       & .arrow
         mask: url("../imgs/right-arrow.svg") no-repeat bottom right
         mask-size: 18px

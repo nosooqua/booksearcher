@@ -5,9 +5,10 @@ import {Book} from "../types/book";
 
 type SearchResultsProps = {
     docs: Book[];
+    numFound: number;
 }
 
-export const SearchResults: React.FC<SearchResultsProps> = ({ docs }) => {
+export const SearchResults: React.FC<SearchResultsProps> = ({ docs, numFound }) => {
 
     const [modalShow, setModalShow] = React.useState(false)
 
@@ -28,9 +29,14 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ docs }) => {
     return (
         <>
             <h1>Результаты поиска:</h1>
+            {docs.length === 0 ?
+                <h3>Нет книг :(</h3>
+                :
+                <h4>Найдено: {numFound} книг; На странице {docs.length} книг</h4>
+            }
             <div className="search-results">
-                {docs.map(book =>
-                    <Box onClick={() => handleCardClick(book)}>
+                {docs.map((book, id) =>
+                    <Box key={id} onClick={() => handleCardClick(book)}>
                         <div className="arrow"/>
                         <img src={`http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} alt="Обложка книги"/>
                         <div className="book-info">

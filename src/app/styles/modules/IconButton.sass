@@ -1,0 +1,28 @@
+@import "../theme"
+
+.icon-button
+  outline: none
+  border: none
+  cursor: pointer
+  flex: 1
+  border-radius: 50%
+  padding: 10px
+  background: transparent
+  align-self: center
+  margin: 2px
+  display: flex
+  justify-content: center
+  align-items: center
+  transition: all .3s
+  &.disabled
+    cursor: inherit
+  &.disabled:hover
+    background: inherit
+  &.disabled:active
+    background: inherit
+  span
+    font-size: 20px
+  &:hover
+    background: $hover-color
+  &:active
+    background: $active-color
