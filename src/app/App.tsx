@@ -56,9 +56,19 @@ const App: React.FC = () => {
                 <div className={`input${searchState ? ' active' : ''}`}>
                     <form onSubmit={handleInputSend}>
                         <Box>
-                            <input disabled={loading} value={value} onChange={handleInputChange} placeholder="Введите название книги"/>
-                            <IconButton type="button" disabled={loading || value === ""} onClick={handleInputClear} icon={<span className="material-icons-outlined">clear</span>}/>
-                            <IconButton type="submit" disabled={loading} icon={<span className="material-icons-outlined">send</span>}/>
+                            <input
+                                disabled={loading} value={value}
+                                onChange={handleInputChange}
+                                placeholder="Введите название книги"/>
+                            <IconButton
+                                type="button"
+                                disabled={loading || value === ""}
+                                onClick={handleInputClear}
+                                icon={<span className="material-icons-outlined">clear</span>}/>
+                            <IconButton
+                                color="main-color"
+                                type="submit" disabled={loading || value === ""}
+                                icon={<span className="material-icons-outlined">send</span>}/>
                             <LoadingBar visible={loading || isTimerActive}/>
                         </Box>
                     </form>
@@ -73,7 +83,6 @@ const App: React.FC = () => {
             </Container>
             <Container className="footer">
                 <p>Особо важная информация для пользователей в футере</p>
-                <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
             </Container>
         </div>
     );

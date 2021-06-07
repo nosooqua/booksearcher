@@ -14,7 +14,7 @@ export const BookModal: React.FC<BookModalProps> = ({ book, show, handleModalClo
     return (
         <>
             <div onClick={handleModalClose} className={`book-modal-container${show ? ' show' : ''}`}>
-                <div className="close"/>
+                <div className="close"><span className="material-icons-outlined">close</span></div>
                 <Box onClick={(e:React.ChangeEvent<HTMLInputElement>) => e.stopPropagation()} className="book-modal">
                     <img src={`http://covers.openlibrary.org/b/id/${book?.cover_i}-L.jpg`} alt="Обложка книги"/>
                     <div className="book-info">

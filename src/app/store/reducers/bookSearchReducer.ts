@@ -12,7 +12,7 @@ const initialState: BookSearchState = {
 export const bookSearchReducer = (state = initialState, action: BookSearchAction): BookSearchState => {
     switch (action.type) {
         case BookSearchTypes.FETCH_BOOKS:
-            return {loading: true, error: null, books: null, page: state.page, limit: state.limit, count: 0}
+            return {loading: true, error: null, books: null, page: 0, limit: 0, count: 0}
         case BookSearchTypes.FETCH_BOOKS_SUCCESS:
             return {loading: false, error: null, books: action.payload, page: action.page, limit: action.limit, count: action.count}
         case BookSearchTypes.FETCH_BOOKS_ERROR:
@@ -20,7 +20,7 @@ export const bookSearchReducer = (state = initialState, action: BookSearchAction
         case BookSearchTypes.CLEAR_BOOKS:
             return {loading: false, error: null, books: null, page: 0, limit: 0, count: 0}
         case BookSearchTypes.CHANGE_PAGE:
-            return {loading: true, error: null, books: null, page: 0, limit: 0, count: 0}
+            return {loading: true, error: null, books: state.books, page: state.page, limit: state.limit, count: state.count}
         default:
             return state
     }

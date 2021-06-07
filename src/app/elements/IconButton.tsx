@@ -6,17 +6,17 @@ type IconButtonProps = {
     onClick?: any
     disabled?: boolean
     type?: "button" | "submit" | "reset"
-    text?: string
+    color?: "default-color" | "main-color"
 }
 
-export const IconButton: React.FC<IconButtonProps> = ({ icon, text, onClick, disabled, type }) => {
+export const IconButton: React.FC<IconButtonProps> = ({ icon, color = "default-color", onClick, disabled, type }) => {
     return (
         <button disabled={disabled}
                 onClick={onClick}
-                className={`icon-button${disabled ? ' disabled' : ''}`}
+                className={`icon-button${disabled ? ' disabled' : ''} ${color}`}
                 type={type}
         >
-            {icon ? icon : <span className="text">{text}</span>}
+            {icon}
         </button>
     )
 }

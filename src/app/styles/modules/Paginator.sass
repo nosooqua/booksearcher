@@ -4,12 +4,14 @@
   display: flex
   justify-content: space-between
   align-items: center
+  flex-wrap: wrap
   .paginator-num
     display: flex
     align-items: center
     h3,h4
       font-weight: 400
       color: $main-text-color
+      margin: 0
       strong
         color: $secondary-text-color
     h3
@@ -21,6 +23,8 @@
 .paginator
   display: inline-flex
   overflow: hidden
+  margin: 18px 0
+  justify-self: right
   button
     background: $background-box-color
     outline: none

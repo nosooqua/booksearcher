@@ -51,47 +51,6 @@ body
           outline: none
           width: 100%
 
-  .search-results
-    display: flex
-    flex-wrap: wrap
-    margin: -12px
-    & > *
-      margin: 12px
-      flex: 1 0 21%
-      padding: 12px 18px
-      box-shadow: 0px 0px 51px 0px rgba(0, 0, 0, 0.08), 0px 6px 18px 0px rgba(0, 0, 0, 0.05)
-      transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow .3s cubic-bezier(0.4, 0, 0.2, 1)
-      transform: translateY(0px)
-      display: flex
-      align-items: center
-      cursor: pointer
-      min-width: 310px
-      & .arrow
-        mask: url("../imgs/right-arrow.svg") no-repeat bottom right
-        mask-size: 18px
-        mask-origin: content-box
-        width: 24px
-        height: 100%
-        right: 18px
-        bottom: 12px
-        background-color: $main-color
-        position: absolute
-      &:hover
-        box-shadow: 0px 0px 114px 0px rgba(0, 0, 0, 0.08), 0px 30px 25px 0px rgba(0, 0, 0, 0.05)
-        transform: translateY(-5px)
-      & img
-        max-width: 140px
-        margin: -24px 0 -12px 0
-      & .book-info
-        margin-left: 16px
-        & .name,.author
-          margin: 8px 0
-        & .name
-          font-weight: 700
-        & .author
-          color: $secondary-text-color
-          font-size: 13px
-
 
 .footer
   flex: 0 0 auto

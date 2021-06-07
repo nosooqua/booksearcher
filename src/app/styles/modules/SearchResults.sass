@@ -1,0 +1,50 @@
+@import "../theme"
+
+.search-results
+  display: flex
+  flex-wrap: wrap
+  margin: -12px
+  & > *
+    margin: 8px
+    flex: 1 0 21%
+    padding: 12px 18px
+    box-shadow: 0 0 51px 0 rgba(0, 0, 0, 0.08), 0 6px 18px 0 rgba(0, 0, 0, 0.05)
+    transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow .3s cubic-bezier(0.4, 0, 0.2, 1)
+    transform: translateY(0px)
+    display: flex
+    align-items: center
+    cursor: pointer
+    min-width: 310px
+    overflow: hidden
+    & .arrow
+      right: 12px
+      bottom: 8px
+      color: $main-color
+      position: absolute
+    &:hover
+      box-shadow: 0 0 114px 0 rgba(0, 0, 0, 0.08), 0 30px 25px 0 rgba(0, 0, 0, 0.05)
+      transform: translateY(-5px)
+    & .book-cover
+      margin: -12px 0 -12px -18px
+      width: 100px
+      flex-shrink: 0
+      height: 100px
+      background-color: #f0f0f0
+      div
+        width: 80px
+        height: 80px
+        margin: 10px
+        background-size: cover !important
+        background-position: center !important
+
+    & .book-info
+      margin-left: 16px
+      & .name,.author
+        margin: 8px 0
+      & .name
+        font-weight: 700
+        max-height: 38px
+        overflow: hidden
+      & .author
+        color: $secondary-text-color
+        font-size: 13px

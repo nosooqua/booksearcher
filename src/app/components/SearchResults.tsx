@@ -2,7 +2,7 @@ import React from "react";
 import {Box} from "../elements/Box";
 import {BookModal} from "./BookModal";
 import {Book} from "../types/book";
-import {Paginator} from "./Paginator";
+import "../styles/modules/SearchResults.sass"
 
 type SearchResultsProps = {
     docs: Book[]
@@ -34,8 +34,12 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ docs }) => {
             <div className="search-results">
                 {docs.map((book, id) =>
                     <Box key={id} onClick={() => handleCardClick(book)}>
-                        <div className="arrow"/>
-                        <img src={`http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} alt="Обложка книги"/>
+                        <div className="arrow">
+                            <span className="material-icons-outlined">chevron_right</span>
+                        </div>
+                        <div className="book-cover">
+                            <div style={{background: `url(http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg)`}} />
+                        </div>
                         <div className="book-info">
                             <p className="name">{book.title}</p>
                             <p className="author">{book.author_name ? book.author_name[0] : "Неизвестно"}</p>
