@@ -20,8 +20,8 @@ export const BookModal: React.FC<BookModalProps> = ({ book, show, handleModalClo
                     <div className="book-info">
                         <p className="name">{book?.title}</p>
                         <p className="author">Автор: <b>{book?.author_name ? book?.author_name.slice(0,5).join(", ") : "Неизвестно"}</b></p>
-                        <p className="author">Дата публикации: <b>{book?.publish_date.slice(0,5).join(", ")}</b></p>
-                        <p className="author">Издатель: <b>{book?.publish_date.slice(0,5).join(", ")}</b></p>
+                        <p className="author">Дата публикации: <b>{book?.publish_date?.slice(0,5).join(", ")}</b></p>
+                        <p className="author">Издатель: <b>{book?.publisher?.slice(0,5).join(", ")}</b></p>
                         <p className="author">ISBN: <b>{book?.isbn ? book?.isbn.slice(0,5).join(", ") : "Неизвестно"}</b></p>
                     </div>
                 </Box>

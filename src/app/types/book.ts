@@ -4,5 +4,6 @@ export interface Book {
     publish_date: string[],
     isbn: string[],
     cover_i: number,
-    author_name?: string[]
+    author_name?: string[],
+    publisher: string[]
 }
