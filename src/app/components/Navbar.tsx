@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/modules/Navbar.sass'
-import {Container} from "./Container";
+import {Container} from "../elements/Container";
 
 export const Navbar: React.FC = ({ children }) => {
     return (

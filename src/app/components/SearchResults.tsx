@@ -1,14 +1,14 @@
 import React from "react";
-import {Box} from "./Box";
+import {Box} from "../elements/Box";
 import {BookModal} from "./BookModal";
 import {Book} from "../types/book";
+import {Paginator} from "./Paginator";
 
 type SearchResultsProps = {
-    docs: Book[];
-    numFound: number;
+    docs: Book[]
 }
 
-export const SearchResults: React.FC<SearchResultsProps> = ({ docs, numFound }) => {
+export const SearchResults: React.FC<SearchResultsProps> = ({ docs }) => {
 
     const [modalShow, setModalShow] = React.useState(false)
 
@@ -28,11 +28,8 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ docs, numFound }) 
 
     return (
         <>
-            <h1>Результаты поиска:</h1>
             {docs.length === 0 ?
-                <h3>Нет книг :(</h3>
-                :
-                <h4>Найдено: {numFound} книг; На странице {docs.length} книг</h4>
+                <h4>Нет книг :(</h4> : ""
             }
             <div className="search-results">
                 {docs.map((book, id) =>

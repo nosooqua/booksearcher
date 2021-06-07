@@ -1,7 +1,8 @@
 import {Dispatch} from "redux";
-import {InputAction, InputState, InputTypes} from "../../types/input";
+import {InputAction, InputTypes} from "../../types/input";
 import {fetchBooks} from "./bookSearch";
 import {BookSearchAction} from "../../types/bookSearch";
+import {RootState} from "../reducers";
 
 let timerID: ReturnType<typeof setTimeout>
 
@@ -33,8 +34,8 @@ export const clearInput = () => {
 }
 
 export const sendInput = () => {
-    return (dispatch: Dispatch<InputAction | BookSearchAction>, getState: () => InputState) => {
-        const { value } = getState()
+    return (dispatch: Dispatch<InputAction | BookSearchAction>, getState: () => RootState) => {
+        const { value } = getState().input
 
         dispatch({ type: InputTypes.SEND_INPUT, value, isTimerActive: false })
 

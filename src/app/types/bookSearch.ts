@@ -4,13 +4,17 @@ export interface BookSearchState {
     books: Docs | null
     loading: boolean
     error: null | string
+    page: number
+    limit: number
+    count: number
 }
 
 export enum BookSearchTypes {
     FETCH_BOOKS = "FETCH_BOOKS",
     FETCH_BOOKS_SUCCESS = "FETCH_BOOKS_SUCCESS",
     FETCH_BOOKS_ERROR = "FETCH_BOOKS_ERROR",
-    CLEAR_BOOKS = "CLEAR_BOOKS"
+    CLEAR_BOOKS = "CLEAR_BOOKS",
+    CHANGE_PAGE = "CHANGE_PAGE"
 }
 
 interface FetchBooksAction {
@@ -19,6 +23,9 @@ interface FetchBooksAction {
 
 interface FetchBooksSuccessAction {
     type: BookSearchTypes.FETCH_BOOKS_SUCCESS;
+    page: number;
+    limit: number;
+    count: number;
     payload: Docs;
 }
 
@@ -31,4 +38,9 @@ interface ClearBooksAction {
     type: BookSearchTypes.CLEAR_BOOKS;
 }
 
-export type BookSearchAction = FetchBooksAction | FetchBooksSuccessAction | FetchBooksErrorAction | ClearBooksAction
+interface ChangePageAction {
+    type: BookSearchTypes.CHANGE_PAGE;
+    page: number;
+}
+
+export type BookSearchAction = FetchBooksAction | FetchBooksSuccessAction | FetchBooksErrorAction | ClearBooksAction | ChangePageAction

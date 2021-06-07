@@ -1,0 +1,44 @@
+@import "../theme"
+
+.paginator-header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  .paginator-num
+    display: flex
+    align-items: center
+    h3,h4
+      font-weight: 400
+      color: $main-text-color
+      strong
+        color: $secondary-text-color
+    h3
+      padding: 12px 24px 12px 0
+      border-right: $hover-color 2px solid !important
+    h4
+      padding: 24px
+
+.paginator
+  display: inline-flex
+  overflow: hidden
+  button
+    background: $background-box-color
+    outline: none
+    border: none
+    cursor: pointer
+    padding: 10px
+    transition: all .3s
+    width: 40px
+    span
+      font-size: 14px
+      margin-top: 2px
+    &:hover
+      background: $hover-color
+    &:active, &.selected
+      background: $active-color
+    &.selected
+      cursor: inherit
+    &:not(:last-child)
+      border-right: $hover-color 1px solid !important
+    &:not(:first-child)
+      border-left: $hover-color 1px solid !important

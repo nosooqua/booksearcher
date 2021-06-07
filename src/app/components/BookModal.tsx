@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/modules/BookModal.sass'
-import {Box} from "./Box";
+import {Box} from "../elements/Box";
 import {Book} from "../types/book";
 
 type BookModalProps = {

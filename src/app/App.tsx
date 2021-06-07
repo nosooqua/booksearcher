@@ -2,15 +2,16 @@ import React from 'react';
 import './styles/app.sass'
 
 import {Logo, Navbar} from "./components/Navbar";
-import {Container} from "./components/Container";
+import {Container} from "./elements/Container";
 import {SearchResults} from "./components/SearchResults";
 import {useDispatch} from "react-redux";
 import {useTypedSelector} from "./hooks/useTypedSelector";
 import {clearInput, input, sendInput} from "./store/action-creators/input";
 import {clearBooks} from "./store/action-creators/bookSearch";
-import {Box} from "./components/Box";
-import {IconButton} from "./components/IconButton";
-import {LoadingBar} from "./components/LoadingBar";
+import {Box} from "./elements/Box";
+import {IconButton} from "./elements/IconButton";
+import {LoadingBar} from "./elements/LoadingBar";
+import {Paginator} from "./components/Paginator";
 
 const App: React.FC = () => {
 
@@ -55,7 +56,7 @@ const App: React.FC = () => {
                 <div className={`input${searchState ? ' active' : ''}`}>
                     <form onSubmit={handleInputSend}>
                         <Box>
-                            <input value={value} onChange={handleInputChange} placeholder="Введите название книги"/>
+                            <input disabled={loading} value={value} onChange={handleInputChange} placeholder="Введите название книги"/>
                             <IconButton type="button" disabled={loading || value === ""} onClick={handleInputClear} icon={<span className="material-icons-outlined">clear</span>}/>
                             <IconButton type="submit" disabled={loading} icon={<span className="material-icons-outlined">send</span>}/>
                             <LoadingBar visible={loading || isTimerActive}/>
@@ -65,7 +66,9 @@ const App: React.FC = () => {
 
                 {error}
 
-                {(searchState && books) && <SearchResults docs={books.docs} numFound={books.numFound}/>}
+                <Paginator/>
+
+                {(searchState && books) && <SearchResults docs={books.docs} />}
 
             </Container>
             <Container className="footer">
